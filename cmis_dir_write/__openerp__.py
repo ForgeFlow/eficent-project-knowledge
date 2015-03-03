@@ -20,8 +20,39 @@
 #
 ##############################################################################
 
-from . import document
-from . import metadata
-from . import cmis_backend
+{
+    'name': 'CMIS Dir Write',
+    'version': '0.1',
+    'category': 'Knowledge Management',
+    'summary': 'Create Folders in DMS from OpenERP directories',
+    'description': """
+Add Folders in DMS from OpenERP directories
+===========================================
+This module allows you to store OpenERP directories in the DMS repository.
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+Configuration
+=============
+
+* Create a new CMIS backend with the host, login and password.
+* Configure the path in the repository where documents will be dropped.
+  By default, it uses the home directory of the user.
+
+""",
+    'author': 'Eficent',
+    'website': 'www.eficent.com',
+    'license': 'AGPL-3',
+    'depends': [
+        'document',
+        'cmis',
+    ],
+    'data': [
+        'cmis_backend_view.xml',
+        'document_view.xml',
+    ],
+    'js': [],
+    'qweb': [],
+    'test': [],
+    'demo': [],
+    'installable': True,
+    'auto_install': False,
+}

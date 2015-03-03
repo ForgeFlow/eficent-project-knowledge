@@ -11,8 +11,10 @@
                 <notebook position="inside">
                     <page string="DMS" name="dms">
                         <group>
-                            <field name="url_dms_folder" widget="url"/>
-
+                            <field name="dms_folder_url" widget="url"/>
+                        </group>
+                        <group>
+                            <field name="dms_cmis_folder_objects"/>
                         </group>
                     </page>
                 </notebook>

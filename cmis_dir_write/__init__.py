@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2015 Eficent (<http://www.eficent.com/>)
-#              Jordi Ballester Alomar <jordi.ballester@eficent.com>
+#    OpenERP, Open Source Management Solution
+#    This module copyright (C) 2014 Savoir-faire Linux
+#    (<http://www.savoirfairelinux.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,26 +20,5 @@
 #
 ##############################################################################
 
-{
-    "name": "Project DMS Link",
-    "version": "1.0",
-    "author": "Eficent",
-    "website": "www.eficent.com",
-    "category": "Generic Modules/Projects & Services",
-    "depends": ["cmis_dir_write", "project"],
-    "description": """
-Project DMS Link
-===========================
-Shows the link to the project directory in the DMS.
-
-    """,
-    "init_xml": [],
-    "update_xml": [
-        'view/project_project_view.xml',
-    ],
-    'demo_xml': [],
-    'test':[],
-    'installable': True,
-    'active': False,
-    'certificate': '',
-}
+from . import document
+from . import cmis_backend

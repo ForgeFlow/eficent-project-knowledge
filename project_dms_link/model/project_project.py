@@ -18,30 +18,47 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import decimal_precision as dp
+
 from openerp.osv import fields, orm
 
 
 class project_project(orm.Model):
     _inherit = 'project.project'
 
-    def _get_url_dms_folder(self, cr, uid, ids, name, args, context=None):
+    def _get_directory_cmis_data(self, cr, uid, ids, name, args, context=None):
         res = dict.fromkeys(ids, False)
         directory_obj = self.pool.get('document.directory')
         project_model_id = self.pool.get('ir.model').search(
             cr, uid, [('model', '=', 'project.project')], context=context)
         for project in self.browse(cr, uid, ids, context=context):
             directory_ids = directory_obj.search(
-                cr, uid, [('ressource_parent_type_id', '=', project_model_id),
+                cr, uid, [('ressource_parent_type_id', '=',
+                           project_model_id[0]),
                           ('ressource_id', '=', project.id)], context=context)
             for directory in directory_obj.browse(cr, uid, directory_ids,
                                                   context=context):
-                res[project.id] = directory.url_dms
+                cmis_object_ids = []
+                for cmis_object in directory.cmis_objects:
+                    cmis_object_ids.append(cmis_object.id)
+
+                res[project.id] = {
+                    'dms_folder_url': directory.url_dms,
+                    'dms_cmis_folder_objects': cmis_object_ids,
+                }
         return res
 
     _columns = {
-        'url_dms_folder': fields.function(_get_url_dms_folder, method=True,
+        'dms_folder_url': fields.function(_get_directory_cmis_data,
+                                          multi='cmis',
+                                          method=True,
                                           type='text',
                                           string='URL of the folder in the '
-                                                 'DMS')
+                                                 'DMS'),
+        'dms_cmis_folder_objects': fields.function(_get_directory_cmis_data,
+                                                   method=True,
+                                                   multi='cmis',
+                                                   type='one2many',
+                                                   obj='cmis.object',
+                                                   string='DMS Objects',
+                                                   readonly=True),
     }

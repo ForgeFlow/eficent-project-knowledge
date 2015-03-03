@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+    <record model="ir.ui.view" id="view_dms_object_tree">
+        <field name="name">cmis.object.tree</field>
+        <field name="model">cmis.object</field>
+        <field name="arch" type="xml">
+            <tree string="DMS Objects">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="content_stream_mime_type"/>
+                <field name="base_type"/>
+                <field name="creation_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_document_directory_form">
+        <field name="name">document.directory</field>
+        <field name="model">document.directory</field>
+        <field name="inherit_id" ref="document.view_document_directory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="url_dms" widget="url"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="DMS objects" name="dms">
+                    <group>
+                        <field name="cmis_objects"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</openerp>
+

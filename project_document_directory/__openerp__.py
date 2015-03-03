@@ -25,7 +25,7 @@
     "author": "Eficent",
     "website": "www.eficent.com",
     "category": "Generic Modules/Projects & Services",
-    "depends": ["document", "project", "document_to_resource_directory"],
+    "depends": ["document", "project"],
     "description": """
 Project Document Directory
 ===========================
