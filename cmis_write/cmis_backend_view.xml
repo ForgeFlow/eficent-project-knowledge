@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+      <record id="view_cmis_backend_form" model="ir.ui.view">
+        <field name="name">cmis.backend.form</field>
+        <field name="model">cmis.backend</field>
+        <field name="inherit_id" ref="cmis.view_cmis_backend_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="navigation_path"
+                       placeholder="e.g. http://localhost:8081/share/page/repository#filter=path|"/>
+            </xpath>
+        </field>
+      </record>
+
+    </data>
+</openerp>

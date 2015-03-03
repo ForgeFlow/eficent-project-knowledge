@@ -1,9 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    This module copyright (C) 2014 Savoir-faire Linux
-#    (<http://www.savoirfairelinux.com>).
+#    Copyright (C) 2015 Eficent (<http://www.eficent.com/>)
+#              Jordi Ballester Alomar <jordi.ballester@eficent.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,8 +19,26 @@
 #
 ##############################################################################
 
-from . import document
-from . import metadata
-from . import cmis_backend
+{
+    "name": "Project DMS Link",
+    "version": "1.0",
+    "author": "Eficent",
+    "website": "www.eficent.com",
+    "category": "Generic Modules/Projects & Services",
+    "depends": ["cmis_write", "project", "document_to_resource_directory"],
+    "description": """
+Project DMS Link
+===========================
+Shows the link to the project directory in the DMS.
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    """,
+    "init_xml": [],
+    "update_xml": [
+        'view/project_project_view.xml',
+    ],
+    'demo_xml': [],
+    'test':[],
+    'installable': True,
+    'active': False,
+    'certificate': '',
+}

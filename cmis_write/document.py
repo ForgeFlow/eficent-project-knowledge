@@ -33,8 +33,30 @@ _logger = logging.getLogger(__name__)
 class document_directory(orm.Model):
     _inherit = 'document.directory'
 
+    def _get_url_dms_folder(self, cr, uid, ids, name, args, context=None):
+        res = dict.fromkeys(ids, False)
+        cmis_backend_obj = self.pool.get('cmis.backend')
+        # login with the cmis account
+        backend_ids = cmis_backend_obj.search(cr, uid, [], context=context)
+        if not backend_ids:
+            return res
+        repo = cmis_backend_obj._auth(cr, uid, backend_ids, context=context)
+        rep_info = repo.getRepositoryInfo()
+        cmis_backend = cmis_backend_obj.browse(cr, uid, backend_ids[0],
+                                               context=context)
+        for directory in self.browse(cr, uid, ids, context=context):
+            if directory.id_dms:
+                folder = repo.getObject(directory.id_dms)
+                props = folder.properties
+                url = cmis_backend.navigation_path + props['cmis:path']
+                res[directory.id] = url
+        return res
+
     _columns = {
         'id_dms': fields.char('Id of Dms', size=256, help="Id of Dms."),
+        'url_dms': fields.function(_get_url_dms_folder, method=True,
+                                   type='text',
+                                   string='URL of the folder in the DMS')
     }
 
     def create(self, cr, uid, values, context=None):

@@ -73,7 +73,9 @@ Contributors
     ],
     'data': [
         'metadata_view.xml',
+        'cmis_backend_view.xml',
         'security/ir.model.access.csv',
+        'document_view.xml',
     ],
     'js': [
         'static/src/js/document.js'
@@ -84,5 +86,3 @@ Contributors
     'installable': True,
     'auto_install': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

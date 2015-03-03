@@ -20,8 +20,17 @@
 #
 ##############################################################################
 
-from . import document
-from . import metadata
-from . import cmis_backend
+from openerp.osv import orm, fields
+from openerp.tools.translate import _
+from cmislib.model import CmisClient
+import cmislib.exceptions
+import urllib2
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+class cmis_backend(orm.Model):
+    _inherit = 'cmis.backend'
+    _columns = {
+        'navigation_path': fields.char('Navigation path', size=128,
+                                       required=True,
+                                       help=""),
+    }
